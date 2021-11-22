@@ -293,6 +293,93 @@ namespace/dev-ns created
 Use imperative commands.
 
 ```
-kubectl create deployment redis-deploy --image=redis --replicas=2  -n dev-ns
+➜  kubectl create deployment redis-deploy --image=redis --replicas=2 -n dev-ns
+deployment.apps/redis-deploy created
+```
+
+## Create a pod called `httpd` using the image `httpd:alpine` in the default namespace. Next, create a service of type `ClusterIP` by the same name `(httpd)`. The target port for the service should be `80`.
+
+Try to do this with as few steps as possible.
+
+**Solution1: 1 step**
+
+```
+➜  kubectl run httpd --image=httpd:alpine --expose --port=80
+service/httpd created
+pod/httpd created
+```
+
+
+
+**Solution 2: 2 steps**
+
+Create pod `httpd`
+
+```
+➜  kubectl run httpd --image=httpd:alpine
+pod/httpd created
+```
+
+Check the pod 
+
+```
+➜  kubectl describe pod httpd
+Name:         httpd
+Namespace:    default
+Priority:     0
+Node:         controlplane/172.25.0.66
+Start Time:   Mon, 02 May 2022 18:18:09 +0000
+Labels:       run=httpd
+Annotations:  <none>
+Status:       Running
+IP:           10.42.0.18
+IPs:
+  IP:  10.42.0.18
+Containers:
+  httpd:
+    Container ID:   containerd://a43a209fb7dafe820e7ef1dcbe6063e6eaf02f295dee070eb8b8c511328e6e08
+    Image:          httpd:alpine
+    Image ID:       docker.io/library/httpd@sha256:4eb4177b9245c686696dd8120c79cd64b7632b27d890db4cad3b0e844ed737af
+    Port:           <none>
+    Host Port:      <none>
+    State:          Running
+      Started:      Mon, 02 May 2022 18:18:17 +0000
+    Ready:          True
+    Restart Count:  0
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-fv5k9 (ro)
+Conditions:
+  Type              Status
+  Initialized       True 
+  Ready             True 
+  ContainersReady   True 
+  PodScheduled      True 
+Volumes:
+  kube-api-access-fv5k9:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    ConfigMapOptional:       <nil>
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age   From               Message
+  ----    ------     ----  ----               -------
+  Normal  Scheduled  84s   default-scheduler  Successfully assigned default/httpd to controlplane
+  Normal  Pulling    83s   kubelet            Pulling image "httpd:alpine"
+  Normal  Pulled     77s   kubelet            Successfully pulled image "httpd:alpine" in 6.405956479s
+  Normal  Created    77s   kubelet            Created container httpd
+  Normal  Started    76s   kubelet            Started container httpd
+```
+
+Create `httpd` serive
+
+```
+➜   kubectl expose pod httpd --port=80 
+service/httpd exposed
 ```
 
