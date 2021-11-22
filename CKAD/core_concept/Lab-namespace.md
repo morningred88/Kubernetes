@@ -4,13 +4,14 @@
 
 ```
 kubectl get ns
+kubectl create ns dev-ns
 kubectl get pods --namespace=dev
 kubectl -n research get pods --no-headers
 kubectl set-context $(kubectl config current-context) --namespace=dev
 kubectl get pods --all-namespaces
 ```
 
-Note: `ns` is the short for `namespaces`
+Note: `ns` and `n` is the short for `namespaces`
 
 ## How many Namespaces exist on the system?
 
