@@ -7,6 +7,7 @@ Frequently used command
 > kubectl get deployments
 > kubectl describe deployments deployment-mame
 > kubectl get all
+> kubectl edit deployment my-deployment
 ```
 
 You can use  `kubectl get all` command to see the deployment was created, then replicaset and followed by pods that were created as part  of the deployment. 
