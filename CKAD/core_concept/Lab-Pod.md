@@ -1,5 +1,26 @@
 # Lab-Pod
 
+Frequent used commands for pods
+
+```
+kubectl get pods
+kubectl get pods <pod name>
+kubectl run redis --image=redis:alpine
+kubectl edit pod <pod name>
+kubectl delete pod webapp
+kubectl describe pod webapp
+kubectl create -f pod-definition.yaml
+or kubectl apply -f pod-definition.yaml
+```
+
+extract the pod definition in YAML format
+
+```
+kubectl get pod webapp -o yaml > my-new-pod.yaml
+```
+
+
+
 ## How many `pods` exist on the system?
 
 ```
